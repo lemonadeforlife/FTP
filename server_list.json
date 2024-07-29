@@ -1,34 +1,46 @@
 [
-    {
-        "url":"1.txt",
-        "contributor":"Server1"
-    },
-    {
-        "url":"2.txt",
-        "contributor":"Server2"
-    },
-    {
-        "url":"3.txt",
-        "contributor":"Server3"
-    },
-    {
-        "url":"4.txt",
-        "contributor":"Server4"
-    },
-    {
-        "url":"5.txt",
-        "contributor":"Server5"
-    },
-    {
-        "url":"6.txt",
-        "contributor":"Server6"
-    },
-    {
-        "url":"7.txt",
-        "contributor":"Server7"
-    },
-    {
-        "url":"MosterFTP.txt",
-        "contributor":"MosterFTP"
-    }
+  {
+    "url": "server.txt",
+    "name": "All Server List",
+    "total": 762
+  },
+  {
+    "url": "1.txt",
+    "name": "Server1",
+    "total": 137
+  },
+  {
+    "url": "2.txt",
+    "name": "Server2",
+    "total": 67
+  },
+  {
+    "url": "3.txt",
+    "name": "Server3",
+    "total": 135
+  },
+  {
+    "url": "4.txt",
+    "name": "Server4",
+    "total": 65
+  },
+  {
+    "url": "5.txt",
+    "name": "Server5",
+    "total": 385
+  },
+  {
+    "url": "6.txt",
+    "name": "Server6",
+    "total": 6
+  },
+  {
+    "url": "7.txt",
+    "name": "Server7",
+    "total": 160
+  },
+  {
+    "url": "MosterFTP.txt",
+    "name": "MosterFTP"
+  }
 ]
