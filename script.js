@@ -51,13 +51,20 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.json())
         .then(data => {
             const serverListDropdown = document.getElementById('serverList');
+            const totalurls = document.getElementById('totalUrls')
             console.log("Server List Loaded.");
             data.forEach(server => {
                 const option = document.createElement('option');
-                option.text = server.contributor;
+                option.text = `${server.name} - ${server.total}`;
                 option.value = server.url;
                 serverListDropdown.add(option);
             });
+            serverListDropdown.addEventListener('change', (e)=>{
+                const selectedOption = e.target.selectedOptions[0];
+                const totallinks = selectedOption.dataset.totallinksl
+                totalurls.textContent = `Total URLS: ${totallinks}`;
+            })
+            serverListDropdown.dispatchEvent(new Event('change'));
         })
         .catch(error => console.error('Error fetching server list:', error));
 
@@ -66,6 +73,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById('startStopBtn').addEventListener('click', function() {
         console.log("Scanning Called");
+        scanningPaused = false;
+        scanningStarted = true;
         startScanning();
 });
 
@@ -74,7 +83,7 @@ function startScanning() {
     // Start scanning
     document.getElementById("startStopBtn").setAttribute("disabled", "true");
     console.log("startScanning() - Fetching List...");
-    fetch(document.getElementById('serverList').value)
+    fetch('server.txt')
         .then(response => response.text())
         .then(text => {
             const urls = text.trim().split('\n');
@@ -98,6 +107,8 @@ function processUrlsSequentially(urls) {
             .then(() => {
                 processUrlsSequentially(urls);
             });
+    } else {
+      console.log("Checking URL has been Stopped.")
     }
 }
 
@@ -163,16 +174,17 @@ function setStatus(url, responseCode, status) {
 
 function resetScanning() {
     clearInterval(timerInterval);
+    scanningPaused = true;
     document.getElementById('startStopBtn').textContent = 'Start';
     document.getElementById('elapsedTime').textContent = '00:00:00';
     elapsedTime = 0;
     processedUrls = 0;
     document.getElementById('progressValue').textContent = '0%';
     document.title = 'BDIXscannerWeb';
+    document.getElementById("startStopBtn").removeAttribute("disabled");
+    document.getElementById('currentUrl').textContent = '';
     document.getElementById('urlList').innerHTML = '';
     document.getElementById('urlList2').innerHTML = '';
-    document.getElementById('currentUrl').textContent = '';
-    document.getElementById("startStopBtn").removeAttribute("disabled");
 }
 
 function formatTime(time) {
